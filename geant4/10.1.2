@@ -1,0 +1,42 @@
+#%Module 1.0
+
+set _module_name  [module-info name]
+set is_module_rm  [module-info mode remove]
+set sys        [uname sysname]
+set os         [uname release]
+
+set version    10.1.2
+
+set GEANT4_PATH /opt/geant4/$version
+
+# data files ...
+setenv G4NEUTRONHPDATA $GEANT4_PATH/data/G4NDL4.5 
+setenv G4LEDATA $GEANT4_PATH/data/G4EMLOW6.41 
+setenv G4LEVELGAMMADATA $GEANT4_PATH/data/PhotonEvaporation3.1 
+setenv G4RADIOACTIVEDATA $GEANT4_PATH/data/RadioactiveDecay4.2 
+setenv G4NEUTRONXSDATA $GEANT4_PATH/data/G4NEUTRONXS1.4 
+setenv G4PIIDATA $GEANT4_PATH/data/G4PII1.3 
+setenv G4REALSURFACEDATA $GEANT4_PATH/data/RealSurface1.0 
+setenv G4SAIDXSDATA $GEANT4_PATH/data/G4SAIDDATA1.1 
+setenv G4ABLADATA $GEANT4_PATH/data/G4ABLA3.0
+
+# generic stuff
+setenv G4WORKDIR $::env(HOME)/geant4
+
+# things people normally care about
+prepend-path PATH            $GEANT4_PATH/bin
+prepend-path LD_LIBRARY_PATH $GEANT4_PATH/lib64
+
+setenv GEANT4_PATH    $GEANT4_PATH
+setenv GEANT4_VERSION $version
+
+proc ModulesHelp { } {
+  puts stderr "Geant4 is a toolkit for the simulation of the passage of"
+  puts stdder " particles through matter. Its areas of application include"
+  puts stderr " high energy, nuclear and accelerator physics, as well as"
+  puts stderr " studies in medical and space science."
+  puts stderr "-----------"
+  puts stderr ""
+}
+
+module-whatis   "GEANT4 simulation toolkit"
